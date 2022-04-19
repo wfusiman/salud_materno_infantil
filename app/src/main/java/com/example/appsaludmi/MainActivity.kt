@@ -16,12 +16,5 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate( layoutInflater )
         setContentView( binding.root )
 
-        binding.btnRegistrarse.setOnClickListener { actionRegistrarse() }
-    }
-
-    private fun actionRegistrarse() {
-        val msj = "REGISTRAR"
-        val intent = Intent( this, RegistrarActivity::class.java).apply { }
-        startActivity( intent )
     }
 }

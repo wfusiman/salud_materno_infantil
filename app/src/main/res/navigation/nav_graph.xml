@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/initFragment">
+
+    <fragment
+        android:id="@+id/initFragment"
+        android:name="com.example.appsaludmi.InitFragment"
+        android:label="fragment_init"
+        tools:layout="@layout/fragment_init" >
+        <action
+            android:id="@+id/action_initFragment_to_formRegistroFragment"
+            app:destination="@id/formRegistroFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/formRegistroFragment"
+        android:name="com.example.appsaludmi.FormRegistroFragment"
+        android:label="fragment_form_registro"
+        tools:layout="@layout/fragment_form_registro" >
+        <action
+            android:id="@+id/action_formRegistroFragment_to_viewRegistroFragment"
+            app:destination="@id/viewRegistroFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewRegistroFragment"
+        android:name="com.example.appsaludmi.viewRegistroFragment"
+        android:label="fragment_view_registro"
+        tools:layout="@layout/fragment_view_registro" />
+
+</navigation>
