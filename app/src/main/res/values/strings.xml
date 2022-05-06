@@ -2,4 +2,10 @@
     <string name="app_name">AppSaludMI</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="item_noticias_value">Noticias</string>
+    <string name="item_recomendaciones_value">Recomendaciones</string>
+    <string name="item_encuestas_value">Recomendaciones</string>
+    <string name="item_perfil_value">Perfil</string>
+    <string name="item_info_value">Info</string>
+    <string name="item_acercade_value">"Acerda de "</string>
 </resources>
