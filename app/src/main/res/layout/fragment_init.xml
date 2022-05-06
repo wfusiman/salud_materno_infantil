@@ -22,10 +22,17 @@
             android:textStyle="bold" />
 
         <Button
+            android:id="@+id/btn_ingresar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ingresar" />
+
+        <Button
             android:id="@+id/btn_registrar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Registrarme" />
+
     </LinearLayout>
 
 </FrameLayout>

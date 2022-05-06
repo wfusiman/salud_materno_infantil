@@ -8,25 +8,48 @@
     <fragment
         android:id="@+id/initFragment"
         android:name="com.example.appsaludmi.InitFragment"
-        android:label="fragment_init"
-        tools:layout="@layout/fragment_init" >
+        android:label="Salud Materno Infantil"
+        tools:layout="@layout/fragment_init">
         <action
             android:id="@+id/action_initFragment_to_formRegistroFragment"
-            app:destination="@id/formRegistroFragment" />
+            app:destination="@id/formRegistroFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/formRegistroFragment"
         android:name="com.example.appsaludmi.FormRegistroFragment"
-        android:label="fragment_form_registro"
-        tools:layout="@layout/fragment_form_registro" >
+        android:label="Registro"
+        tools:layout="@layout/fragment_form_registro">
         <action
             android:id="@+id/action_formRegistroFragment_to_viewRegistroFragment"
-            app:destination="@id/viewRegistroFragment" />
+            app:destination="@id/viewRegistroFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/viewRegistroFragment"
         android:name="com.example.appsaludmi.viewRegistroFragment"
-        android:label="fragment_view_registro"
-        tools:layout="@layout/fragment_view_registro" />
+        android:label="Registro"
+        tools:layout="@layout/fragment_view_registro">
+        <!--<argument
+            android:name="nombre"
+            app:argType="string" />
+        <argument
+            android:name="apellido"
+            app:argType="string" />
+        <argument
+            android:name="domicilio"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="fnacimiento"
+            app:argType="string"
+            app:nullable="true" />-->
+    </fragment>
 
 </navigation>

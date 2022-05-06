@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="registroViewModel"
+            type="com.example.appsaludmi.RegistroViewModel" />
+    </data>
+<FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#E0F2F1"
@@ -20,7 +28,7 @@
             android:layout_weight="1"
             android:text="Registro perfil"
             android:textAlignment="center"
-            android:textColor="#673AB7"
+            android:textColor="#9C27B0"
             android:textSize="34sp"
             android:textStyle="bold" />
 
@@ -34,6 +42,7 @@
                 android:id="@+id/textViewNombre"
                 android:layout_width="197dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:text="Nombre:"
                 android:textColor="#9C27B0"
@@ -61,6 +70,7 @@
                 android:id="@+id/textViewApellido"
                 android:layout_width="197dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:text="Apellido:"
                 android:textColor="#9C27B0"
@@ -88,6 +98,7 @@
                 android:id="@+id/textViewDomicilio"
                 android:layout_width="197dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:text="Domicilio:"
                 android:textColor="#9C27B0"
@@ -113,8 +124,9 @@
 
             <TextView
                 android:id="@+id/textView6"
-                android:layout_width="395dp"
+                android:layout_width="400dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:text="Fecha de nacimiento:"
                 android:textColor="#9C27B0"
@@ -148,3 +160,4 @@
 
     </LinearLayout>
 </FrameLayout>
+</layout>

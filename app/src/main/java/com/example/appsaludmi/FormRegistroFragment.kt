@@ -1,24 +1,23 @@
 package com.example.appsaludmi
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.example.appsaludmi.databinding.FragmentFormRegistroBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
-
-const val EXTRA_MESSAGE_1 = "MESSAGE_DATA1"
-const val EXTRA_MESSAGE_2 = "MESSAGE_DATA2"
-const val EXTRA_MESSAGE_3 = "MESSAGE_DATA3"
-const val EXTRA_MESSAGE_4 = "MESSAGE_DATA4"
 
 /**
  * A simple [Fragment] subclass.
@@ -30,8 +29,8 @@ class FormRegistroFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    private lateinit var binding: FragmentFormRegistroBinding
-    private lateinit var model: RegistroViewModel
+    private lateinit var _binding: FragmentFormRegistroBinding
+    private val regViewModel: RegistroViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,29 +43,46 @@ class FormRegistroFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        binding = FragmentFormRegistroBinding.inflate( inflater, container, false )
-        val view = binding.root
+        _binding = DataBindingUtil.inflate( inflater, R.layout.fragment_form_registro, container, false )
+        //_binding = FragmentFormRegistroBinding.inflate( inflater, container, false )
+        val view = _binding.root
 
-        model = ViewModelProvider( this ).get( RegistroViewModel::class.java );
+        _binding.registroViewModel = regViewModel
+        _binding.lifecycleOwner = viewLifecycleOwner
 
-        binding.editTextApellido.setText( model.apellido )
-        binding.editTextNombre.setText( model.nombre )
-        binding.editTextDomicilio.setText( model.domicilio )
-        binding.editTextFNacimiento.setText( model.fnac )
+        _binding.editTextApellido.setText( regViewModel.apellido.value )
+        _binding.editTextNombre.setText( regViewModel.nombre.value )
+        _binding.editTextDomicilio.setText( regViewModel.domicilio.value )
+        _binding.editTextFNacimiento.setText( regViewModel.fnac.value )
 
-        binding.brnRegistrar.setOnClickListener { actionRegistrar() }
+        _binding.editTextNombre.addTextChangedListener{
+            Log.i("Change value nombre","Value nombre: " + _binding.editTextNombre.text.toString() )
+            regViewModel.registryNombre( _binding.editTextNombre.text.toString())
+        }
+
+        _binding.brnRegistrar.setOnClickListener{
+            regViewModel.registry( _binding.editTextNombre.text.toString(),
+                _binding.editTextApellido.text.toString() ,
+                _binding.editTextDomicilio.text.toString(),
+                _binding.editTextFNacimiento.text.toString() )
+            /*val action = FormRegistroFragmentDirections.actionFormRegistroFragmentToViewRegistroFragment(
+                model.apellido.value.toString(),
+                model.nombre.value.toString(),
+                model.domicilio.value,
+                model.fnac.value )*/
+            val action = FormRegistroFragmentDirections.actionFormRegistroFragmentToViewRegistroFragment()
+            view.findNavController().navigate( action )
+        }
+
+        regViewModel.nombre.observe( viewLifecycleOwner , Observer { n -> Log.i("info","nombre observer: " + n ) })
+        /*regViewModel.apellido.observe( viewLifecycleOwner, Observer { a -> regViewModel.registryApellido(a) })
+        regViewModel.domicilio.observe( viewLifecycleOwner, Observer { d -> regViewModel.registruDomicilio(d) })
+        regViewModel.fnac.observe( viewLifecycleOwner, Observer { fn -> regViewModel.registryFechaNacimiento( fn ) })*/
         return view
     }
 
-    private fun actionRegistrar() {
-        model.apellido = binding.editTextApellido.text.toString()
-        model.nombre = binding.editTextNombre.text.toString()
-        model.domicilio = binding.editTextDomicilio.text.toString()
-        model.fnac = binding.editTextFNacimiento.text.toString()
-
-    }
 
     companion object {
         /**

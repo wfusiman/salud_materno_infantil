@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/item_noticias"
+        android:title="@string/item_noticias_value" />
+    <item
+        android:id="@+id/item_recomendaciones"
+        android:title="@string/item_recomendaciones_value" />
+    <item
+        android:id="@+id/item_encuestas"
+        android:title="@string/item_encuestas_value" />
+    <item
+        android:id="@+id/item_perfil"
+        android:title="@string/item_perfil_value" />
+    <item
+        android:id="@+id/item_info"
+        android:title="@string/item_info_value" />
+    <item
+        android:id="@+id/item_acercade"
+        android:title="@string/item_acercade_value" />
+</menu>

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navOptions
 import com.example.appsaludmi.databinding.FragmentInitBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -46,7 +47,7 @@ class InitFragment : Fragment() {
     }
 
     private fun action_btn_registrar() {
-        findNavController().navigate(R.id.action_initFragment_to_formRegistroFragment)
+        findNavController().navigate(R.id.action_initFragment_to_formRegistroFragment )
     }
 
 
