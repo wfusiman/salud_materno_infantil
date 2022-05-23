@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="contenidoNoticias">
+        <item>
+            El Gobierno del Chubut, a través del Ministerio de Salud provincial que conduce Fabián Puratich, destacó que, según informó este lunes por la tarde el Monitor Público de Vacunación del Ministerio de Salud de la Nación, hasta el momento se han aplicado más de 550.000 vacunas contra el Covid-19 en toda la provincia, dentro del marco de la Campaña “Chubut Vacunate”.
+        </item>
+        <item>
+El gobernador del Chubut, Mariano Arcioni, firmó este martes el contrato de obra para la remodelación y ampliación del Centro Materno Infantil de Trelew, que demandará una inversión de $56.653.287,85 y un plazo de ejecución de 270 días corridos.
+Acompañaron al mandatario provincial el ministro de Infraestructura, Energía y Planificación, Gustavo Aguilera; de Salud, Fabián Puratich; y de Economía, Oscar Antonena; el director del Hospital Zonal de Trelew, Cristian Setevich, el director del Centro Materno Infantil, Matías Mendelevich, el socio gerente de la empresa Canal Construcciones SRL, Eliseo Farías, subsecretarios de Salud e invitados especiales.
+        </item>
+        <item>
+En 2002, Chubut era una de las provincias con índice más alto de mortalidad infantil, de un 16 por mil. Ahora, mientras algunas provincias aún conservan las dos dígitos, allí bajó al 7, una de las tasas más bajas del país, según la cifra registrada en 2018. “Aunque la ciencia no tiene una única respuesta sabemos que gran parte de la prevención está relacionada con la rigurosidad en el control del embarazo”, explica María Eugenia Marcon, jefa de Perinatología en el Ministerio de Salud de Chubut. La clave del logro en esa provincia fue precisamente la prevención y el trabajo en red: allí se lleva a cabo hace 15 años el programa Creciendo Juntos, que depende de ese ministerio y la Fundación para la Salud Materno Infantil (Fundasamin), una entidad conformada por obstetras, neonatólogas, pediatras y enfermeros. Se trata de “capacitar a los profesionales y acompañar el seguimiento de los casos más complicados, desde la comunicación constante pero principalmente desde el mismo hospital”, relata la neonatóloga Ana Pedraza, de Fundasamin y responsable del plan. Desde hace cuatro años lo replican en la provincia de Neuquén, donde las cifras de mortalidad infantil vienen en descenso.
+        </item>
+    </string-array>
+</resources>

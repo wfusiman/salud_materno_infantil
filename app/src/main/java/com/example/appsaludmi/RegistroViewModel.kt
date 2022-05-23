@@ -1,9 +1,15 @@
 package com.example.appsaludmi
 
+import android.app.Application
 import android.util.Log
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.appsaludmi.db.connect.SmiRoomDb
+import com.example.appsaludmi.db.connect.SmiRoomDb_Impl
+import com.example.appsaludmi.db.dao.PerfilDAO
+import com.example.appsaludmi.db.repo.RepoPerfiles
 
 class RegistroViewModel: ViewModel() {
 

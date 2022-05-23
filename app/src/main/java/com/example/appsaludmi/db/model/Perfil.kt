@@ -9,6 +9,12 @@ data class Perfil (
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0,
 
+    @ColumnInfo(name="usr")
+    var usr : String,
+
+    @ColumnInfo( name="passwd")
+    var passwd: String,
+
     @ColumnInfo(name = "nombre")
     var nombre: String,
 
@@ -16,8 +22,8 @@ data class Perfil (
     var apellido: String,
 
     @ColumnInfo(name = "domicilio")
-    var domicilio: String?,
+    var domicilio: String,
 
     @ColumnInfo(name = "fecha_nacimiento")
-    var fechaNacicimiento: String
+    var fechaNacimiento: String
 )

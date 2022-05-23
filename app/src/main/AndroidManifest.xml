@@ -10,13 +10,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppSaludMI">
         <activity
-            android:name=".ViewRegistroActivity"
-            android:exported="false" />
-        <activity
-            android:name=".RegistrarActivity"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PrincipalActivity"
+            android:exported="false" />
+        <activity
+            android:name=".recomendaciones.RecomendacionesActivity"
+            android:exported="false"
+            android:label="Salud  Infantil" />
+        <activity
+            android:name=".noticias.NoticiasActivity"
+            android:exported="false"
+            android:label="Salud Materno Infantil" />
+        <activity
+            android:name=".InitActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

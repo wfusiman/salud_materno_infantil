@@ -1,18 +1,18 @@
 package com.example.appsaludmi
 
 import android.os.Bundle
-import android.util.Log
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.addTextChangedListener
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.appsaludmi.databinding.FragmentFormRegistroBinding
+import com.example.appsaludmi.db.model.Perfil
+import com.example.appsaludmi.viewModels.PerfilViewModel
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,8 +29,11 @@ class FormRegistroFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    private lateinit var _binding: FragmentFormRegistroBinding
-    private val regViewModel: RegistroViewModel by viewModels()
+    private var _binding: FragmentFormRegistroBinding? = null
+    private val binding get() = _binding!!
+
+    //private val regViewModel: RegistroViewModel by viewModels()
+    private lateinit var perfilViewModel: PerfilViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,41 +48,48 @@ class FormRegistroFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        _binding = DataBindingUtil.inflate( inflater, R.layout.fragment_form_registro, container, false )
-        //_binding = FragmentFormRegistroBinding.inflate( inflater, container, false )
-        val view = _binding.root
+        // _binding = DataBindingUtil.inflate( inflater, R.layout.fragment_form_registro, container, false )
+        _binding = FragmentFormRegistroBinding.inflate( inflater, container, false )
+        val view = binding.root
 
-        _binding.registroViewModel = regViewModel
-        _binding.lifecycleOwner = viewLifecycleOwner
+        perfilViewModel =ViewModelProvider(requireActivity()).get(PerfilViewModel::class.java)
 
-        _binding.editTextApellido.setText( regViewModel.apellido.value )
-        _binding.editTextNombre.setText( regViewModel.nombre.value )
-        _binding.editTextDomicilio.setText( regViewModel.domicilio.value )
-        _binding.editTextFNacimiento.setText( regViewModel.fnac.value )
+        binding.brnRegistrar.setOnClickListener {
+            if (binding.editTextUsr.length() > 0 && binding.editTextPasswd.length() > 0 && binding.editTextPasswd2.length() > 0) {
+                val usr = binding.editTextUsr.text.toString()
+                val pass = binding.editTextPasswd.text.toString()
+                val pass2 = binding.editTextPasswd2.text.toString()
+                if (pass != pass2) {
+                    val toast = Toast.makeText( context, "Las contraseñas no coinciden", Toast.LENGTH_LONG )
+                    toast.setGravity(Gravity.BOTTOM,0,0);
+                    toast.show()
+                }
+                else {
+                    val stat = perfilViewModel.isUsuarioRegistrado( usr )
+                    if (stat) {
+                        val toast = Toast.makeText( context, "El usuario ya esta registrado", Toast.LENGTH_LONG )
+                        toast.setGravity(Gravity.BOTTOM,0,0);
+                        toast.show()
+                    }
+                    else {
+                        val perfil: Perfil = Perfil(
+                                usr = usr,
+                                passwd = pass,
+                                nombre = "",
+                                apellido = "",
+                                domicilio = "",
+                                fechaNacimiento = "" )
+                        perfilViewModel.registrar( perfil )
 
-        _binding.editTextNombre.addTextChangedListener{
-            Log.i("Change value nombre","Value nombre: " + _binding.editTextNombre.text.toString() )
-            regViewModel.registryNombre( _binding.editTextNombre.text.toString())
+                        val action = FormRegistroFragmentDirections.actionFormRegistroFragmentToEditPerfilFragment( usr )
+                        view.findNavController().navigate( action )
+                    }
+                }
+
+            }
+
         }
 
-        _binding.brnRegistrar.setOnClickListener{
-            regViewModel.registry( _binding.editTextNombre.text.toString(),
-                _binding.editTextApellido.text.toString() ,
-                _binding.editTextDomicilio.text.toString(),
-                _binding.editTextFNacimiento.text.toString() )
-            /*val action = FormRegistroFragmentDirections.actionFormRegistroFragmentToViewRegistroFragment(
-                model.apellido.value.toString(),
-                model.nombre.value.toString(),
-                model.domicilio.value,
-                model.fnac.value )*/
-            val action = FormRegistroFragmentDirections.actionFormRegistroFragmentToViewRegistroFragment()
-            view.findNavController().navigate( action )
-        }
-
-        regViewModel.nombre.observe( viewLifecycleOwner , Observer { n -> Log.i("info","nombre observer: " + n ) })
-        /*regViewModel.apellido.observe( viewLifecycleOwner, Observer { a -> regViewModel.registryApellido(a) })
-        regViewModel.domicilio.observe( viewLifecycleOwner, Observer { d -> regViewModel.registruDomicilio(d) })
-        regViewModel.fnac.observe( viewLifecycleOwner, Observer { fn -> regViewModel.registryFechaNacimiento( fn ) })*/
         return view
     }
 

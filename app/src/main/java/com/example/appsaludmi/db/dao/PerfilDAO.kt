@@ -13,10 +13,13 @@ interface PerfilDAO {
     @Query("SELECT * FROM perfiles ORDER BY id DESC")
     fun getPerfiles(): LiveData<List<Perfil>>
 
-    @Insert( onConflict = OnConflictStrategy.IGNORE)
+    @Insert( onConflict = OnConflictStrategy.REPLACE)
     suspend fun savePerfil( perfil: Perfil)
 
-    @Query("delete from perfiles")
-    suspend fun  deleteAllPerfiles()
+    @Query("Delete from perfiles")
+    suspend fun  deleteAllPerfiles(): Int
+
+    @Query("UPDATE perfiles SET nombre=:nom, apellido=:ap, domicilio=:dom, fecha_nacimiento=:fnac WHERE id = :idUsr")
+    suspend fun updatePerfil(idUsr: Int, nom: String, ap: String, dom: String, fnac: String )
 
 }

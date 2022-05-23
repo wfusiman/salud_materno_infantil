@@ -1,16 +1,12 @@
 package com.example.appsaludmi
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.example.appsaludmi.databinding.FragmentInitBinding
-import com.example.appsaludmi.viewModels.PerfilViewModel
+import com.example.appsaludmi.databinding.FragmentPrincipalBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,14 +18,13 @@ private const val ARG_PARAM2 = "param2"
  * Use the [InitFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class InitFragment : Fragment() {
+class PrincipalFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
-    private var _binding: FragmentInitBinding? = null
+    private var _binding: FragmentPrincipalBinding? = null
     private val binding get() = _binding!!
-    private lateinit var perfilViewModel: PerfilViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,28 +37,24 @@ class InitFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        _binding = FragmentInitBinding.inflate( inflater,container, false )
+    ): View {
+        _binding = FragmentPrincipalBinding.inflate( inflater, container, false )
         val view = binding.root
 
-        perfilViewModel = ViewModelProvider(requireActivity()).get(PerfilViewModel::class.java)
-
-        perfilViewModel.perfiles.observe( viewLifecycleOwner, Observer { perfiles ->  perfiles?.let { Log.i("Info","Lista de perfiles , tamaño: " + perfiles.size ) }})
-
-        binding.btnInitIngresar.setOnClickListener { actionIngresar() }
-        binding.btnInitRegistrar.setOnClickListener { actionRegistrar() }
-
+        binding.btnRegistrar.setOnClickListener { action_btn_registrar() }
+        binding.btnIngresar.setOnClickListener { action_btn_login()  }
         return view
     }
 
-    private fun actionRegistrar() {
+    private fun action_btn_login() {
+        findNavController().navigate(R.id.action_initFragment_to_loginFragment )
+    }
+
+    private fun action_btn_registrar() {
         findNavController().navigate(R.id.action_initFragment_to_formRegistroFragment )
     }
 
-    private fun actionIngresar() {
-        findNavController().navigate(R.id.action_initFragment_to_loginFragment )
-    }
+
 
     companion object {
         /**

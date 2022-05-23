@@ -1,11 +1,18 @@
 <resources>
     <string name="app_name">AppSaludMI</string>
+    <string name="titulo">Salud Materno Infantil</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="item_noticias_value">Noticias</string>
     <string name="item_recomendaciones_value">Recomendaciones</string>
-    <string name="item_encuestas_value">Recomendaciones</string>
+    <string name="item_encuestas_value">Encuestas</string>
     <string name="item_perfil_value">Perfil</string>
     <string name="item_info_value">Info</string>
     <string name="item_acercade_value">"Acerda de "</string>
+    <string name="title_activity_noticias">NoticiasActivity</string>
+
+    <string name="noticia2">8 de Enero de 2020 - Cómo se logró bajar en Chubut la tasa de mortalidad infantil</string>
+    <string name="noticia1">17 de noviembre de 2021 - REMODELARÁN Y AMPLIARÁN EL CENTRO MATERNO INFANTIL DE TRELEW CON UNA INVERSIÓN SUPERIOR A LOS $50 MILLONES</string>
+    <string name="noticia0">8 de setpiembre de 2021 - CHUBUT APLICÓ MÁS DE 550.000 VACUNAS CONTRA EL COVID-19</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

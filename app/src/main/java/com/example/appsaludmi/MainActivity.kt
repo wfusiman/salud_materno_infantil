@@ -1,21 +1,29 @@
 package com.example.appsaludmi
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.setupWithNavController
 import com.example.appsaludmi.databinding.ActivityMainBinding
-import com.google.android.material.navigation.NavigationView
+import com.example.appsaludmi.noticias.NoticiasActivity
+import com.example.appsaludmi.recomendaciones.RecomendacionesActivity
+import com.example.appsaludmi.viewModels.PerfilViewModel
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var appBarConfig: AppBarConfiguration
     private lateinit var drawerLayout: DrawerLayout
+    private lateinit var perfilViewModel: PerfilViewModel
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,11 +33,27 @@ class MainActivity : AppCompatActivity() {
 
         drawerLayout = binding.drawerLayout
         val navHostFragmet = supportFragmentManager.findFragmentById( R.id.nav_host_fragment ) as NavHostFragment
-        val navController = navHostFragmet.navController
-        // findViewById<NavigationView>(R.id.nav_view).setupWithNavController(navController)
+        navController = navHostFragmet.navController
         NavigationUI.setupWithNavController( binding.navView, navController )
         appBarConfig = AppBarConfiguration( navController.graph )
+
         NavigationUI.setupActionBarWithNavController( this, navController, drawerLayout )
+
+        binding.navView.setNavigationItemSelectedListener { menuItem ->
+            Log.i("listener item ", " menu item " + menuItem )
+            if (menuItem.toString() == "Noticias") {
+                //navController.navigate( R.id.noticiasFragment )
+                val  noticiasAct =  Intent( this, NoticiasActivity::class.java)
+                startActivity( noticiasAct )
+            }
+            else if (menuItem.toString() == "Recomendaciones") {
+                val  recsAct =  Intent( this, RecomendacionesActivity::class.java)
+                startActivity( recsAct )
+            }
+            drawerLayout.closeDrawer( GravityCompat.START )
+            return@setNavigationItemSelectedListener true
+        }
+        perfilViewModel = ViewModelProvider(this)[PerfilViewModel::class.java]
 
         setContentView( view )
     }
@@ -38,4 +62,5 @@ class MainActivity : AppCompatActivity() {
         val navController = this.findNavController( R.id.nav_host_fragment)
         return NavigationUI.navigateUp( navController, drawerLayout )
     }
+
 }

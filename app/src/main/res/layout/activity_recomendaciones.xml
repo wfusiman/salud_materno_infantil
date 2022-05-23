@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".recomendaciones.RecomendacionesActivity">
+
+    <TextView
+        android:id="@+id/textViewTituloRecomendaciones"
+        android:layout_width="match_parent"
+        android:layout_height="63dp"
+        android:background="#E0F2F1"
+        android:paddingTop="20dp"
+        android:text="Recomendaciones / Consejos"
+        android:textAlignment="center"
+        android:textColor="#673AB7"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <fragment
+        android:id="@+id/fragment_items_recomendaciones"
+        android:name="com.example.appsaludmi.recomendaciones.ItemRecomendacionFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        tools:layout="@layout/fragment_item_recomendacion_list" />
+
+</LinearLayout>

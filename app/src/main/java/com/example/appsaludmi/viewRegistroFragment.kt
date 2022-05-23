@@ -7,8 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.example.appsaludmi.databinding.FragmentViewRegistroBinding
+import com.example.appsaludmi.viewModels.PerfilViewModel
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,8 +28,9 @@ class viewRegistroFragment : Fragment() {
     private var param2: String? = null
 
     private lateinit var binding: FragmentViewRegistroBinding
-    private val viewModel: RegistroViewModel by viewModels()
+    //private val viewModel: RegistroViewModel by viewModels()
     //val args: viewRegistroFragmentArgs by navArgs()
+    private lateinit var perfilViewModel: PerfilViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,16 +48,23 @@ class viewRegistroFragment : Fragment() {
         binding = FragmentViewRegistroBinding.inflate( inflater, container, false )
         val view = binding.root
 
-        Log.i("onCreateView", "Inicio fragmento view registro" )
-        Log.i("info", "Model : " + viewModel.apellido.value + ", " + viewModel.nombre.value + ", " + viewModel.domicilio.value + ", " +  viewModel.fnac.value )
-        /*binding.textViewNombreInput.setText( args.nombre )
-        binding.textViewApellidoInput.setText( args.apellido)
-        binding.textViewDomicilioInput.setText( args.domicilio)
-        binding.textViewFechaNacInput.setText( args.fnacimiento )*/
-        binding.textViewApellidoInput.setText( viewModel.apellido.value )
-        binding.textViewNombreInput.setText( viewModel.nombre.value )
-        binding.textViewDomicilioInput.setText( viewModel.domicilio.value )
-        binding.textViewFechaNacInput.setText( viewModel.fnac.value )
+        perfilViewModel = ViewModelProvider(this)[PerfilViewModel::class.java]
+        //val usr = args.usuario
+
+        val perfil = perfilViewModel.getPerfil( "usr" )
+        if (perfil != null) {
+            binding.textViewUsrInput.text = perfil.usr
+            binding.textViewApellidoInput.text = perfil.apellido
+            binding.textViewNombreInput.text = perfil.nombre
+            binding.textViewDomicilioInput.text = perfil.domicilio
+            binding.textViewFechaNacInput.text = perfil.fechaNacimiento
+        }
+        else {
+            binding.textViewTituloViewRegistro.text = "No se encontro perfil"
+            //binding.textViewUsrInput.text = usr
+            binding.textViewUsrInput.text = "usr"
+        }
+
         return view
     }
 
