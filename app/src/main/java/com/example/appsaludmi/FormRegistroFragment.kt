@@ -81,7 +81,11 @@ class FormRegistroFragment : Fragment() {
                                 fechaNacimiento = "" )
                         perfilViewModel.registrar( perfil )
 
-                        val action = FormRegistroFragmentDirections.actionFormRegistroFragmentToEditPerfilFragment( usr )
+                        val toast = Toast.makeText( context, "Usuario registrado", Toast.LENGTH_LONG )
+                        toast.setGravity(Gravity.BOTTOM,0,0);
+                        toast.show()
+
+                        val action = FormRegistroFragmentDirections.actionFormRegistroFragmentToLoginFragment()
                         view.findNavController().navigate( action )
                     }
                 }

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/perfil_nav"
+    app:startDestination="@id/editPerfilFragment">
+
+    <fragment
+        android:id="@+id/editPerfilFragment"
+        android:name="com.example.appsaludmi.EditPerfilFragment"
+        android:label="fragment_edit_perfil"
+        tools:layout="@layout/fragment_edit_perfil" >
+        <action
+            android:id="@+id/action_editPerfilFragment_to_basicInfoFragment"
+            app:destination="@id/basicInfoFragment" />
+        <action
+            android:id="@+id/action_editPerfilFragment_to_hogarInfoFragment"
+            app:destination="@id/hogarInfoFragment" />
+        <action
+            android:id="@+id/action_editPerfilFragment_to_tabaquismoInfoFragment"
+            app:destination="@id/tabaquismoInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/basicInfoFragment"
+        android:name="com.example.appsaludmi.BasicInfoFragment"
+        android:label="fragment_basic_info"
+        tools:layout="@layout/fragment_basic_info" >
+        <action
+            android:id="@+id/action_basicInfoFragment_to_mapDomicilioFragment"
+            app:destination="@id/mapDomicilioFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/hogarInfoFragment"
+        android:name="com.example.appsaludmi.HogarInfoFragment"
+        android:label="fragment_hogar_info"
+        tools:layout="@layout/fragment_hogar_info" />
+    <fragment
+        android:id="@+id/tabaquismoInfoFragment"
+        android:name="com.example.appsaludmi.TabaquismoInfoFragment"
+        android:label="fragment_tabaquismo_info"
+        tools:layout="@layout/fragment_tabaquismo_info" />
+    <fragment
+        android:id="@+id/mapDomicilioFragment"
+        android:name="com.example.appsaludmi.MapDomicilioFragment"
+        android:label="fragment_map_domicilio"
+        tools:layout="@layout/fragment_map_domicilio" />
+</navigation>

@@ -22,22 +22,12 @@
         android:name="com.example.appsaludmi.FormRegistroFragment"
         android:label="FormRegistroFragment" >
         <action
-            android:id="@+id/action_formRegistroFragment_to_editPerfilFragment"
-            app:destination="@id/editPerfilFragment">
-        </action>
+            android:id="@+id/action_formRegistroFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.appsaludmi.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" />
-    <fragment
-        android:id="@+id/editPerfilFragment"
-        android:name="com.example.appsaludmi.EditPerfilFragment"
-        android:label="fragment_edit_perfil"
-        tools:layout="@layout/fragment_edit_perfil" >
-        <argument
-            android:name="usr"
-            app:argType="string" />
-    </fragment>
 </navigation>

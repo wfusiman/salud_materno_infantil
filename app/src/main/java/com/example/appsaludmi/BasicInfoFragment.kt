@@ -3,15 +3,14 @@ package com.example.appsaludmi
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
+import com.example.appsaludmi.databinding.FragmentBasicInfoBinding
 import androidx.navigation.fragment.findNavController
-import com.example.appsaludmi.databinding.FragmentEditPerfilBinding
 import java.util.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -21,15 +20,15 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [EditPerfilFragment.newInstance] factory method to
+ * Use the [BasicInfoFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class EditPerfilFragment : Fragment() {
+class BasicInfoFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
-    private var _binding: FragmentEditPerfilBinding? = null
+    private var _binding: FragmentBasicInfoBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,15 +44,25 @@ class EditPerfilFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentEditPerfilBinding.inflate( inflater, container, false )
+        _binding = FragmentBasicInfoBinding.inflate( inflater,container,false)
         val view = binding.root
 
-        binding.cardview1.setOnClickListener { actionEditBasicInfo() }
+        binding.editTextFNac.setOnClickListener { actionFechaNac() }
+        binding.editTextDomicilio.setOnClickListener { actionSelectDomicilio() }
         return view
     }
 
-    private fun actionEditBasicInfo() {
-        findNavController().navigate(R.id.action_editPerfilFragment_to_basicInfoFragment )
+    private fun actionSelectDomicilio() {
+        findNavController().navigate(R.id.action_basicInfoFragment_to_mapDomicilioFragment )
+    }
+
+    private fun actionFechaNac() {
+        val dialogFecha = DatePickerFragment { year, month, day ->  cargarResultado( year,month,day )}
+        dialogFecha.show( parentFragmentManager, "DatePicker")
+    }
+
+    private fun cargarResultado(year: Int, month: Int, day: Int) {
+        binding.editTextFNac.setText( "$day / $month / $year" )
     }
 
     companion object {
@@ -63,12 +72,12 @@ class EditPerfilFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment EditPerfilFragment.
+         * @return A new instance of fragment BasicInfoFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            EditPerfilFragment().apply {
+            BasicInfoFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
@@ -76,4 +85,18 @@ class EditPerfilFragment : Fragment() {
             }
     }
 
+    class DatePickerFragment ( val listener : (year: Int, month: Int, day:Int ) -> Unit): DialogFragment(),DatePickerDialog.OnDateSetListener {
+        override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+            val c = Calendar.getInstance()
+            val anio = c.get( Calendar.YEAR)
+            val mes = c.get(Calendar.MONTH)
+            val dia = c.get( Calendar.DAY_OF_MONTH)
+
+            return DatePickerDialog( requireActivity(), this, anio, mes, dia )
+        }
+        override fun onDateSet(p0: DatePicker?, y: Int, m: Int, d: Int) {
+            listener(y,m+1,d)
+        }
+
+    }
 }

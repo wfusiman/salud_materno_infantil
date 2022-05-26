@@ -1,6 +1,6 @@
 package com.example.appsaludmi
 
-import android.graphics.Color
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
@@ -9,12 +9,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import com.example.appsaludmi.databinding.FragmentFormRegistroBinding
 import com.example.appsaludmi.databinding.FragmentLoginBinding
 import com.example.appsaludmi.viewModels.PerfilViewModel
-import com.google.android.material.snackbar.Snackbar
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -56,9 +53,12 @@ class LoginFragment : Fragment() {
         perfilViewModel = ViewModelProvider( requireActivity()).get(PerfilViewModel::class.java)
 
         binding.btnIngresar.setOnClickListener {
-            if (perfilViewModel.validateUsuario( binding.editTextUsr.text.toString(), binding.editTextPasswdLogin.text.toString())) {
+            val usr = binding.editTextUsr.text.toString()
+            val pass = binding.editTextPasswdLogin.text.toString()
+            if (perfilViewModel.validateUsuario( usr, pass )) {
                 Log.i("Login","Usuario validado")
-                // Mostrar pantalla principal
+                val principalAct = Intent( activity, MainActivity::class.java )
+                startActivity( principalAct )
             }
             else {
                 Log.i("Login","Usuario no encontrado")

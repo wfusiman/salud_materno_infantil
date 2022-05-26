@@ -3,12 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/wfusiman/Desktop/tnt/tnt_salud_materno_infantil/app/src/main/res/drawable/person_info.xml" value="0.2095" />
         <entry key="..\:/Users/wfusiman/Desktop/tnt/tnt_salud_materno_infantil/app/src/main/res/layout/activity_init.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/wfusiman/Desktop/tnt/tnt_salud_materno_infantil/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/wfusiman/Desktop/tnt/tnt_salud_materno_infantil/app/src/main/res/layout/activity_noticias.xml" value="0.1503623188405797" />
+        <entry key="..\:/Users/wfusiman/Desktop/tnt/tnt_salud_materno_infantil/app/src/main/res/layout/activity_perfil.xml" value="0.18614130434782608" />
         <entry key="..\:/Users/wfusiman/Desktop/tnt/tnt_salud_materno_infantil/app/src/main/res/layout/activity_principal.xml" value="0.18614130434782608" />
         <entry key="..\:/Users/wfusiman/Desktop/tnt/tnt_salud_materno_infantil/app/src/main/res/layout/activity_recomendaciones.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/wfusiman/Desktop/tnt/tnt_salud_materno_infantil/app/src/main/res/layout/content_noticias.xml" value="0.1" />
+        <entry key="..\:/Users/wfusiman/Desktop/tnt/tnt_salud_materno_infantil/app/src/main/res/layout/fragment_basic_info.xml" value="0.18614130434782608" />
         <entry key="..\:/Users/wfusiman/Desktop/tnt/tnt_salud_materno_infantil/app/src/main/res/layout/fragment_contenido.xml" value="0.19010416666666666" />
         <entry key="..\:/Users/wfusiman/Desktop/tnt/tnt_salud_materno_infantil/app/src/main/res/layout/fragment_edit_perfil.xml" value="0.18614130434782608" />
         <entry key="..\:/Users/wfusiman/Desktop/tnt/tnt_salud_materno_infantil/app/src/main/res/layout/fragment_form_registro.xml" value="0.20416666666666666" />
@@ -16,6 +19,7 @@
         <entry key="..\:/Users/wfusiman/Desktop/tnt/tnt_salud_materno_infantil/app/src/main/res/layout/fragment_item_recomendacion.xml" value="0.1" />
         <entry key="..\:/Users/wfusiman/Desktop/tnt/tnt_salud_materno_infantil/app/src/main/res/layout/fragment_item_recomendacion_list.xml" value="0.1503623188405797" />
         <entry key="..\:/Users/wfusiman/Desktop/tnt/tnt_salud_materno_infantil/app/src/main/res/layout/fragment_login.xml" value="0.25" />
+        <entry key="..\:/Users/wfusiman/Desktop/tnt/tnt_salud_materno_infantil/app/src/main/res/layout/fragment_map_domicilio.xml" value="0.18614130434782608" />
         <entry key="..\:/Users/wfusiman/Desktop/tnt/tnt_salud_materno_infantil/app/src/main/res/layout/fragment_noticia.xml" value="0.1503623188405797" />
         <entry key="..\:/Users/wfusiman/Desktop/tnt/tnt_salud_materno_infantil/app/src/main/res/layout/fragment_noticias.xml" value="0.1503623188405797" />
         <entry key="..\:/Users/wfusiman/Desktop/tnt/tnt_salud_materno_infantil/app/src/main/res/layout/fragment_principal.xml" value="0.18614130434782608" />

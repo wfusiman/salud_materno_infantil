@@ -41,19 +41,8 @@ class PrincipalFragment : Fragment() {
         _binding = FragmentPrincipalBinding.inflate( inflater, container, false )
         val view = binding.root
 
-        binding.btnRegistrar.setOnClickListener { action_btn_registrar() }
-        binding.btnIngresar.setOnClickListener { action_btn_login()  }
         return view
     }
-
-    private fun action_btn_login() {
-        findNavController().navigate(R.id.action_initFragment_to_loginFragment )
-    }
-
-    private fun action_btn_registrar() {
-        findNavController().navigate(R.id.action_initFragment_to_formRegistroFragment )
-    }
-
 
 
     companion object {

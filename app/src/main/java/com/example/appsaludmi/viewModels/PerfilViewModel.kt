@@ -14,7 +14,7 @@ class PerfilViewModel( application: Application): AndroidViewModel( application 
     
     private val repo: RepoPerfiles
     val perfiles: LiveData<List<Perfil>>
-    private var perfilLog : Perfil? = null // perfil de usuario logueado
+    private var perfilSign : Perfil? = null // perfil de usuario logueado
 
     init {
         val perfilDao =SmiRoomDb.obtenerDB( application, viewModelScope ).perfilDao()
@@ -46,8 +46,8 @@ class PerfilViewModel( application: Application): AndroidViewModel( application 
         if (perfil == null)
             return false;
         else {
-            perfilLog = perfil
-            return perfil != null
+            perfilSign = perfil
+            return true
         }
     }
 

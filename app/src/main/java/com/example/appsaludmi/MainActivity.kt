@@ -32,11 +32,11 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
 
         drawerLayout = binding.drawerLayout
+
         val navHostFragmet = supportFragmentManager.findFragmentById( R.id.nav_host_fragment ) as NavHostFragment
         navController = navHostFragmet.navController
         NavigationUI.setupWithNavController( binding.navView, navController )
         appBarConfig = AppBarConfiguration( navController.graph )
-
         NavigationUI.setupActionBarWithNavController( this, navController, drawerLayout )
 
         binding.navView.setNavigationItemSelectedListener { menuItem ->
@@ -49,6 +49,10 @@ class MainActivity : AppCompatActivity() {
             else if (menuItem.toString() == "Recomendaciones") {
                 val  recsAct =  Intent( this, RecomendacionesActivity::class.java)
                 startActivity( recsAct )
+            }
+            else if (menuItem.toString() == "Perfil") {
+                val  perfilAct =  Intent( this, PerfilActivity::class.java)
+                startActivity( perfilAct )
             }
             drawerLayout.closeDrawer( GravityCompat.START )
             return@setNavigationItemSelectedListener true
@@ -63,4 +67,7 @@ class MainActivity : AppCompatActivity() {
         return NavigationUI.navigateUp( navController, drawerLayout )
     }
 
+    override fun onBackPressed() {
+        return;
+    }
 }

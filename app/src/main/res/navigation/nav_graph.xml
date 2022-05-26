@@ -9,6 +9,6 @@
         android:id="@+id/principalFragment"
         android:name="com.example.appsaludmi.PrincipalFragment"
         android:label="Salud Materno Infantil"
-        tools:layout="@layout/fragment_principal"/>
+        tools:layout="@layout/fragment_principal" />
 
 </navigation>
