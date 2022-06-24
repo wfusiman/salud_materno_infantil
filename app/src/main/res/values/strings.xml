@@ -15,4 +15,5 @@
     <string name="noticia0">8 de setpiembre de 2021 - CHUBUT APLICÓ MÁS DE 550.000 VACUNAS CONTRA EL COVID-19</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_farmacias_maps">FarmaciasMapsActivity</string>
 </resources>

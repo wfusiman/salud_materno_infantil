@@ -1,8 +1,10 @@
 package com.example.appsaludmi.viewModels
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.appsaludmi.db.connect.SmiRoomDb
 import com.example.appsaludmi.db.model.Perfil
@@ -14,7 +16,7 @@ class PerfilViewModel( application: Application): AndroidViewModel( application 
     
     private val repo: RepoPerfiles
     val perfiles: LiveData<List<Perfil>>
-    private var perfilSign : Perfil? = null // perfil de usuario logueado
+
 
     init {
         val perfilDao =SmiRoomDb.obtenerDB( application, viewModelScope ).perfilDao()
@@ -22,9 +24,11 @@ class PerfilViewModel( application: Application): AndroidViewModel( application 
         perfiles = repo.allPerfiles
     }
 
+
     fun registrar( perfil: Perfil) = viewModelScope.launch( Dispatchers.IO ) {
         repo.insert( perfil )
     }
+
 
     fun isUsuarioRegistrado( usuario: String ): Boolean {
         val list : List<Perfil>? = perfiles.value
@@ -39,19 +43,18 @@ class PerfilViewModel( application: Application): AndroidViewModel( application 
         return perfil
     }
 
-    fun validateUsuario( usr: String , passwd: String ): Boolean {
+    fun validateUsuario( usr: String , passwd: String ): Perfil? {
         val list : List<Perfil>? = perfiles.value
 
-        val perfil = list?.find { p -> p.usr == usr && p.passwd == passwd }
-        if (perfil == null)
-            return false;
+        val perfil2 = list?.find { p -> p.usr == usr && p.passwd == passwd }
+        if (perfil2 == null)
+            return null;
         else {
-            perfilSign = perfil
-            return true
+            Log.i("validate","+++++ Perfil: " + perfil2!!.apellido.toString() )
+            return perfil2
         }
     }
 
-    fun updatePerfil( id: Int, perfil: Perfil )  = viewModelScope.launch( Dispatchers.IO ) {
-        repo.update( id, perfil.nombre, perfil.apellido, perfil.domicilio, perfil.fechaNacimiento)
+    fun updatePerfil()  = viewModelScope.launch( Dispatchers.IO ) {
     }
 }

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "624068867289",
+    "project_id": "tnt-smi",
+    "storage_bucket": "tnt-smi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:624068867289:android:7e58d6fa36d17a61fb7ac8",
+        "android_client_info": {
+          "package_name": "com.unpsjb.tnt.appsaludmi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "624068867289-sl8md6pnl88e87rka7jafbctg07aed3m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDix0IRR9UmQDb9MH47yp8oiPsYJzYF-UI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "624068867289-sl8md6pnl88e87rka7jafbctg07aed3m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

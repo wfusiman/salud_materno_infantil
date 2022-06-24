@@ -1,14 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="#E0F2F1"
+android:orientation="vertical"
+tools:context=".TabaquismoInfoFragment">
+
+<TextView
+    android:id="@+id/textViewTituloTabaquismo"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".TabaquismoInfoFragment">
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="20dp"
+    android:layout_marginRight="10dp"
+    android:text="Informacion Tabaquismo"
+    android:textAlignment="center"
+    android:textColor="#9C27B0"
+    android:textSize="28sp"
+    android:textStyle="bold" />
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <CheckBox
+        android:id="@+id/checkBox_fuma"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:buttonTint="#673AB7"
+        android:text="Es fumadora"
+        android:textColor="#9C27B0"
+        android:textSize="20sp" />
 
-</FrameLayout>
+    <CheckBox
+        android:id="@+id/checkBox_funadores"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:buttonTint="#673AB7"
+        android:text="Convive con fumadores"
+        android:textColor="#9C27B0"
+        android:textSize="20sp" />
+
+    <Button
+    android:id="@+id/btn_guardar_taquismo"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="20dp"
+    android:layout_marginRight="10dp"
+    android:text="Guardar" />
+
+</LinearLayout>

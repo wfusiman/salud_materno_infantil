@@ -1,18 +1,19 @@
 package com.example.appsaludmi
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.appsaludmi.databinding.FragmentFormRegistroBinding
-import com.example.appsaludmi.db.model.Perfil
-import com.example.appsaludmi.viewModels.PerfilViewModel
+import com.example.appsaludmi.db.model.PerfilUsuario
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -33,7 +34,9 @@ class FormRegistroFragment : Fragment() {
     private val binding get() = _binding!!
 
     //private val regViewModel: RegistroViewModel by viewModels()
-    private lateinit var perfilViewModel: PerfilViewModel
+    // private lateinit var perfilViewModel: PerfilViewModel
+    private lateinit var auth: FirebaseAuth
+    private val fdb: FirebaseDatabase = FirebaseDatabase.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,49 +55,79 @@ class FormRegistroFragment : Fragment() {
         _binding = FragmentFormRegistroBinding.inflate( inflater, container, false )
         val view = binding.root
 
-        perfilViewModel =ViewModelProvider(requireActivity()).get(PerfilViewModel::class.java)
+        // perfilViewModel =ViewModelProvider(requireActivity()).get(PerfilViewModel::class.java)
 
-        binding.brnRegistrar.setOnClickListener {
-            if (binding.editTextUsr.length() > 0 && binding.editTextPasswd.length() > 0 && binding.editTextPasswd2.length() > 0) {
-                val usr = binding.editTextUsr.text.toString()
-                val pass = binding.editTextPasswd.text.toString()
-                val pass2 = binding.editTextPasswd2.text.toString()
-                if (pass != pass2) {
-                    val toast = Toast.makeText( context, "Las contraseñas no coinciden", Toast.LENGTH_LONG )
-                    toast.setGravity(Gravity.BOTTOM,0,0);
-                    toast.show()
-                }
-                else {
-                    val stat = perfilViewModel.isUsuarioRegistrado( usr )
-                    if (stat) {
-                        val toast = Toast.makeText( context, "El usuario ya esta registrado", Toast.LENGTH_LONG )
-                        toast.setGravity(Gravity.BOTTOM,0,0);
-                        toast.show()
-                    }
-                    else {
-                        val perfil: Perfil = Perfil(
-                                usr = usr,
-                                passwd = pass,
-                                nombre = "",
-                                apellido = "",
-                                domicilio = "",
-                                fechaNacimiento = "" )
-                        perfilViewModel.registrar( perfil )
-
-                        val toast = Toast.makeText( context, "Usuario registrado", Toast.LENGTH_LONG )
-                        toast.setGravity(Gravity.BOTTOM,0,0);
-                        toast.show()
-
-                        val action = FormRegistroFragmentDirections.actionFormRegistroFragmentToLoginFragment()
-                        view.findNavController().navigate( action )
-                    }
-                }
-
-            }
-
-        }
+        auth = FirebaseAuth.getInstance()
+        binding.btnRegistrar.setOnClickListener { registrarUsuario() }
 
         return view
+    }
+
+    private fun registrarUsuario() {
+        val usr = binding.editTextUsr.text.toString()
+        val pass = binding.editTextPasswd.text.toString()
+        val pass2 = binding.editTextPasswd2.text.toString()
+
+        if (usr.isEmpty()) {
+            val toastr = Toast.makeText( context, "Debe ingresar usuario", Toast.LENGTH_LONG )
+            toastr.setGravity(Gravity.TOP, 0,100 )
+            toastr.show()
+            return
+        }
+        if (pass.isEmpty()) {
+            val toastr = Toast.makeText( context, "Debe ingresar password", Toast.LENGTH_LONG )
+            toastr.setGravity(Gravity.TOP, 0,100 )
+            toastr.show()
+            return
+        }
+        if (pass2.isEmpty()) {
+            val toastr = Toast.makeText( context, "Debe re ingresar password", Toast.LENGTH_LONG )
+            toastr.setGravity(Gravity.TOP, 0,100 )
+            toastr.show()
+            return
+        }
+        if (pass != pass2) {
+            val toastr = Toast.makeText( context, "Las contraseñas no coinciden", Toast.LENGTH_LONG )
+            toastr.setGravity(Gravity.TOP, 0,100 )
+            toastr.show()
+            return
+        }
+        activity?.let {
+                auth.createUserWithEmailAndPassword(usr,pass)
+                    .addOnCompleteListener(it) { task ->
+                        if (task.isSuccessful) {
+                            val userID = auth.currentUser?.uid
+                            val ref: DatabaseReference = fdb.reference
+                            val usr = PerfilUsuario( usuario = usr, nombre_apellido = "", domicilio = "", latlng="", fechaNacimiento = "", fechaConcepcion = "", personasHogar = 0, habitaciones = 0, calefaccion = "", fumadora = false, conviveFumadores = false )
+                            if (userID != null) {
+                                ref.child("perfiles").child(userID).setValue( usr )
+                            };
+
+                            Log.i("Registro", "CreateUserWithEmail sucesfull")
+                            val toastr  = Toast.makeText( context, "Registro exitoso, inicie sesion", Toast.LENGTH_LONG)
+                            toastr.setGravity(Gravity.TOP, 0,100 )
+                            toastr.show()
+                            val loginFragment = FormRegistroFragmentDirections.actionFormRegistroFragmentToLoginFragment()
+                            findNavController().navigate( loginFragment )
+                        }
+                        else {
+                            var msj = task.exception?.message
+                            Log.i("Registro","CreateUserWithEmail fallo " + msj )
+
+                            if (msj!= null && msj.contains("The email address is already in use")) {
+                                val toastr  = Toast.makeText( context, "El email ya se encuentra registrado", Toast.LENGTH_LONG)
+                                toastr.setGravity(Gravity.TOP, 0,100 )
+                                toastr.show()
+                            }
+                            else {
+                                val toastr = Toast.makeText( context, msj, Toast.LENGTH_LONG)
+                                toastr.setGravity(Gravity.TOP, 0,100 )
+                                toastr.show()
+                            }
+                        }
+                    }
+            }
+
     }
 
 

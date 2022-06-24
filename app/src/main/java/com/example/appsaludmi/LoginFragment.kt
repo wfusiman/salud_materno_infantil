@@ -2,16 +2,15 @@ package com.example.appsaludmi
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.ViewModelProvider
 import com.example.appsaludmi.databinding.FragmentLoginBinding
-import com.example.appsaludmi.viewModels.PerfilViewModel
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -31,8 +30,16 @@ class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
-    //private val regViewModel: RegistroViewModel by viewModels()
-    private lateinit var perfilViewModel: PerfilViewModel
+    //private lateinit var perfilViewModel: PerfilViewModel
+
+    //private val dataViewModel: InfoViewModel  by activityViewModels()
+    //private  val dataViewModel: PerfilUsuarioViewModel by activityViewModels()
+
+    //private lateinit var dataViewModel: PerfilUsuarioViewModel
+
+
+    private lateinit var mAuth: FirebaseAuth
+    private val fdb: FirebaseDatabase = FirebaseDatabase.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,26 +57,64 @@ class LoginFragment : Fragment() {
         _binding = FragmentLoginBinding.inflate( inflater, container, false )
         val view = binding.root
 
-        perfilViewModel = ViewModelProvider( requireActivity()).get(PerfilViewModel::class.java)
+        // perfilViewModel = ViewModelProvider( requireActivity()).get(PerfilViewModel::class.java)
+        //dataViewModel = ViewModelProvider( requireActivity()).get(PerfilUsuarioViewModel::class.java)
 
-        binding.btnIngresar.setOnClickListener {
-            val usr = binding.editTextUsr.text.toString()
-            val pass = binding.editTextPasswdLogin.text.toString()
-            if (perfilViewModel.validateUsuario( usr, pass )) {
-                Log.i("Login","Usuario validado")
-                val principalAct = Intent( activity, MainActivity::class.java )
-                startActivity( principalAct )
-            }
-            else {
-                Log.i("Login","Usuario no encontrado")
-                val toast = Toast.makeText( context, "Usuario no registrado o contraseña invalida", Toast.LENGTH_LONG )
-                toast.setGravity(Gravity.BOTTOM,0,0);
+        mAuth = FirebaseAuth.getInstance()
 
-                toast.show()
-            }
-        }
+        binding.btnIngresar.setOnClickListener { sigInUsuario() }
         return view
     }
+
+    private fun sigInUsuario() {
+        val usr = binding.editTextUsr.text.toString()
+        val pass = binding.editTextPasswdLogin.text.toString()
+
+        if (usr.isEmpty() || pass.isEmpty()) {
+            var toastr = Toast.makeText( context, "Ingrese email/password de usuario", Toast.LENGTH_LONG )
+            toastr.setGravity( Gravity.TOP, 0, 100)
+            toastr.show()
+            return;
+        }
+        activity?.let {
+            mAuth.signInWithEmailAndPassword( usr,pass )
+                .addOnCompleteListener(it) { task ->
+                    if (task.isSuccessful) {
+                        //cargarDatosUsuario()
+                        val principalAct = Intent( activity, MainActivity::class.java )
+                        startActivity( principalAct )
+                    } else {
+                        var toastr = Toast.makeText( context, "Usuario o contraseña invalida", Toast.LENGTH_LONG )
+                        toastr.setGravity( Gravity.TOP, 0,100)
+                        toastr.show()
+                    }
+            }
+        }
+
+    }
+
+    /*private fun cargarDatosUsuario() {
+        val userID = mAuth.currentUser?.uid
+        val ref: DatabaseReference = fdb.reference
+        if (userID != null) {
+            ref.child("perfiles").child(userID).get().addOnSuccessListener {
+                dataViewModel.setNombre(it.child("nombre_apellido").value.toString())
+                dataViewModel.setDomicilio( it.child("domicilio").value.toString())
+                dataViewModel.setLatlng( it.child("latlng").value.toString())
+                dataViewModel.setFechaNac( it.child("fechaNacimiento").value.toString())
+                dataViewModel.setFechaConcepcion( it.child("fechaConcepcion").value.toString() )
+                dataViewModel.setFuma(it.child("fumadora").value as Boolean)
+                dataViewModel.setFumaConvive(it.child("conviveFumadores").value as Boolean)
+                dataViewModel.setPersonas( it.child("personasHogar").value as Long )
+                dataViewModel.setHabitaciones( it.child("habitaciones").value as Long )
+                dataViewModel.setCalefaccion( it.child("calefaccion").value.toString() )
+
+                Log.i("SMI Login","nombre: " + dataViewModel.nombre.value.toString() );
+            }.addOnFailureListener {
+                Log.e("Firebase","Error getting data ")
+            }
+        }
+    }*/
 
     companion object {
         /**

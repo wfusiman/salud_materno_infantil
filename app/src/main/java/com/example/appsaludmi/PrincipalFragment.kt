@@ -1,12 +1,16 @@
 package com.example.appsaludmi
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.appsaludmi.databinding.FragmentPrincipalBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,6 +29,7 @@ class PrincipalFragment : Fragment() {
 
     private var _binding: FragmentPrincipalBinding? = null
     private val binding get() = _binding!!
+    private var fuser : FirebaseUser? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +46,25 @@ class PrincipalFragment : Fragment() {
         _binding = FragmentPrincipalBinding.inflate( inflater, container, false )
         val view = binding.root
 
+        fuser = FirebaseAuth.getInstance().currentUser
+        if (fuser != null) {
+            binding.textViewUsuario.setText( fuser!!.email.toString() )
+            binding.textViewCerrarSession.setOnClickListener { cerrarSession() }
+        }
+        else
+            binding.textViewUsuario.setText( "Usuario no logueado" )
+
         return view
+    }
+
+    private fun cerrarSession() {
+        Log.i("App Smi","Cerrar sesion")
+        var user = FirebaseAuth.getInstance().currentUser
+        if (user != null) {
+            FirebaseAuth.getInstance().signOut()
+            val init = Intent(activity, InitActivity::class.java )
+            startActivity( init )
+        }
     }
 
 

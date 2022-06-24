@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -33,32 +34,52 @@
         android:maxHeight="50dp"
         android:src="@drawable/pregnant_icon" />
 
-    <EditText
-        android:id="@+id/editTextUsr"
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="58dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_marginRight="10dp"
-        android:focusable="true"
-        android:hint="Usuario"
-        android:includeFontPadding="true"
-        android:textColorHighlight="#ff7eff15"
-        android:textColorHint="#673AB7"
-        android:textSize="20sp" />
-
-    <EditText
-        android:id="@+id/editTextPasswdLogin"
-        android:layout_width="match_parent"
-        android:layout_height="59dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginBottom="20dp"
         android:ems="10"
-        android:hint="Contraseña"
-        android:inputType="textPassword"
-        android:textColorHint="#673AB7"
-        android:textSize="20sp" />
+        android:hint="email"
+        app:boxBackgroundColor="#E0F2F1"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextUsr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:textColor="#673AB7"
+            android:textColorHint="#673AB7"
+            android:textSize="20sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="20dp"
+        android:ems="10"
+        android:hint="contraseña"
+        app:boxBackgroundColor="#E0F2F1"
+        app:endIconMode="password_toggle"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextPasswdLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:inputType="textPassword"
+            android:textColor="#673AB7"
+            android:textColorHint="#673AB7"
+            android:textSize="20sp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btnIngresar"

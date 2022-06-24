@@ -1,8 +1,13 @@
 package com.example.appsaludmi
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.activityViewModels
 import com.example.appsaludmi.databinding.ActivityInitBinding
+import com.example.appsaludmi.viewModels.PerfilUsuarioViewModel
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 class InitActivity : AppCompatActivity() {
 
@@ -11,10 +16,16 @@ class InitActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setContentView(R.layout.activity_init)
+
         _binding = ActivityInitBinding.inflate( layoutInflater )
         val view = binding.root
         setContentView( view )
-        getSupportActionBar()?.hide()
+
+        /*user = FirebaseAuth.getInstance().currentUser
+        if (user != null) {
+            val principalAct = Intent( this, MainActivity::class.java )
+            startActivity( principalAct )
+        }*/
+        supportActionBar?.hide()
     }
 }

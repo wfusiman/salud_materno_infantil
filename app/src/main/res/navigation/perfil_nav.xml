@@ -26,22 +26,37 @@
         android:label="fragment_basic_info"
         tools:layout="@layout/fragment_basic_info" >
         <action
-            android:id="@+id/action_basicInfoFragment_to_mapDomicilioFragment"
-            app:destination="@id/mapDomicilioFragment" />
+            android:id="@+id/action_basicInfoFragment_to_mapDomicilioSelectFragment"
+            app:destination="@id/mapDomicilioSelectFragment" />
+        <action
+            android:id="@+id/action_basicInfoFragment_to_editPerfilFragment"
+            app:destination="@id/editPerfilFragment" />
     </fragment>
     <fragment
         android:id="@+id/hogarInfoFragment"
         android:name="com.example.appsaludmi.HogarInfoFragment"
         android:label="fragment_hogar_info"
-        tools:layout="@layout/fragment_hogar_info" />
+        tools:layout="@layout/fragment_hogar_info" >
+        <action
+            android:id="@+id/action_hogarInfoFragment_to_editPerfilFragment"
+            app:destination="@id/editPerfilFragment" />
+    </fragment>
     <fragment
         android:id="@+id/tabaquismoInfoFragment"
         android:name="com.example.appsaludmi.TabaquismoInfoFragment"
         android:label="fragment_tabaquismo_info"
-        tools:layout="@layout/fragment_tabaquismo_info" />
+        tools:layout="@layout/fragment_tabaquismo_info" >
+        <action
+            android:id="@+id/action_tabaquismoInfoFragment_to_editPerfilFragment"
+            app:destination="@id/editPerfilFragment" />
+    </fragment>
     <fragment
-        android:id="@+id/mapDomicilioFragment"
-        android:name="com.example.appsaludmi.MapDomicilioFragment"
-        android:label="fragment_map_domicilio"
-        tools:layout="@layout/fragment_map_domicilio" />
+        android:id="@+id/mapDomicilioSelectFragment"
+        android:name="com.example.appsaludmi.MapDomicilioSelectFragment"
+        android:label="fragment_map_domicilio_select"
+        tools:layout="@layout/fragment_map_domicilio_select">
+        <action
+            android:id="@+id/action_mapDomicilioSelectFragment_to_basicInfoFragment"
+            app:destination="@id/basicInfoFragment"/>
+    </fragment>
 </navigation>

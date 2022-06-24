@@ -3,16 +3,23 @@
 
     <item
         android:id="@+id/item_perfil"
+        android:icon="@drawable/pregnant_icon"
         android:title="@string/item_perfil_value" />
     <item
         android:id="@+id/item_noticias"
+        android:icon="@drawable/newspaper"
         android:title="@string/item_noticias_value" />
     <item
         android:id="@+id/item_recomendaciones"
+        android:icon="@drawable/advise"
         android:title="@string/item_recomendaciones_value" />
     <item
+        android:id="@+id/item_farmacias"
+        android:icon="@drawable/pharmacy"
+        android:title="Farmacias" />
+    <!--<item
         android:id="@+id/item_encuestas"
-        android:title="@string/item_encuestas_value" />
+        android:title="@string/item_encuestas_value" />-->
     <item
         android:id="@+id/item_acercade"
         android:title="@string/item_acercade_value" />

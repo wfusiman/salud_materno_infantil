@@ -1,5 +1,6 @@
 package com.example.appsaludmi
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.NavController
@@ -7,6 +8,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.example.appsaludmi.databinding.ActivityPerfilBinding
+import com.example.appsaludmi.noticias.NoticiasActivity
 
 class PerfilActivity : AppCompatActivity() {
 
@@ -20,5 +22,11 @@ class PerfilActivity : AppCompatActivity() {
         val view = binding.root
 
         setContentView( view )
+    }
+
+
+    override fun onBackPressed() {
+        val principalAct =  Intent( this, MainActivity::class.java)
+        startActivity( principalAct )
     }
 }

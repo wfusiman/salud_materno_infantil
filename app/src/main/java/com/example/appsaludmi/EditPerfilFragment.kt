@@ -10,8 +10,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.appsaludmi.databinding.FragmentEditPerfilBinding
+import com.example.appsaludmi.viewModels.PerfilUsuarioViewModel
 import java.util.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -32,6 +34,8 @@ class EditPerfilFragment : Fragment() {
     private var _binding: FragmentEditPerfilBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var dataViewModel: PerfilUsuarioViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -48,12 +52,28 @@ class EditPerfilFragment : Fragment() {
         _binding = FragmentEditPerfilBinding.inflate( inflater, container, false )
         val view = binding.root
 
+        dataViewModel = ViewModelProvider(requireActivity()).get(PerfilUsuarioViewModel::class.java)
+        Log.i("SMI Basic info","nombre: " + dataViewModel.nombre.value.toString() );
+
         binding.cardview1.setOnClickListener { actionEditBasicInfo() }
+        binding.cardview2.setOnClickListener { actionEdtiHogarInfo() }
+        binding.cardview3.setOnClickListener { actionEditTabaquismoInfo() }
         return view
     }
 
+    private fun actionEdtiHogarInfo() {
+        val action = EditPerfilFragmentDirections.actionEditPerfilFragmentToHogarInfoFragment()
+        findNavController().navigate( action )
+    }
+
+    private fun actionEditTabaquismoInfo() {
+        val action = EditPerfilFragmentDirections.actionEditPerfilFragmentToTabaquismoInfoFragment()
+        findNavController().navigate( action )
+    }
+
     private fun actionEditBasicInfo() {
-        findNavController().navigate(R.id.action_editPerfilFragment_to_basicInfoFragment )
+        val action = EditPerfilFragmentDirections.actionEditPerfilFragmentToBasicInfoFragment()
+        findNavController().navigate( action )
     }
 
     companion object {

@@ -16,6 +16,7 @@ import com.example.appsaludmi.databinding.ActivityMainBinding
 import com.example.appsaludmi.noticias.NoticiasActivity
 import com.example.appsaludmi.recomendaciones.RecomendacionesActivity
 import com.example.appsaludmi.viewModels.PerfilViewModel
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
 
@@ -54,6 +55,11 @@ class MainActivity : AppCompatActivity() {
                 val  perfilAct =  Intent( this, PerfilActivity::class.java)
                 startActivity( perfilAct )
             }
+            else if (menuItem.toString() == "Farmacias") {
+                val  farmaciasAct =  Intent( this, FarmaciasMapsActivity::class.java)
+                startActivity( farmaciasAct )
+            }
+
             drawerLayout.closeDrawer( GravityCompat.START )
             return@setNavigationItemSelectedListener true
         }
@@ -68,6 +74,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        return;
+        return
     }
 }
